@@ -8,7 +8,7 @@ Course_project_Habit_Tracker - курсовой проект по Django "Тре
 
 1. Клонируйте репозиторий:
 ```
-https://github.com/RomanBatyuk/Django_REST_Framework
+https://github.com/RomanBatyuk/Course_project_Habit_Tracker
 ```
 2. Установите зависимости:
 ```
