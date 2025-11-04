@@ -1,1 +1,20 @@
+SECRET_KEY=Секретный ключ вашего проекта
 
+CELERY_BROKER_URL=Ваш путь для redis
+CELERY_RESULT_BACKEND=Ваш путь для redis
+
+EMAIL_HOST=Ваш хост для почты
+EMAIL_PORT=Ваш порт для почты
+EMAIL_USE_TLS=False
+EMAIL_USE_SSL=True
+EMAIL_HOST_USER=Ваша почта
+EMAIL_HOST_PASSWORD=Ваш пароль для рассылки
+SITE_URL=Путь к Вашему сайту
+
+NAME=Название вашей БД
+USER=Ваш пользователь
+PASSWORD=Ваш пароль
+HOST=Ваш хост
+PORT=Ваш порт
+
+TELEGRAM_BOT_TOKEN=Токен Вашего телеграмм бота
