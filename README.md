@@ -15,6 +15,11 @@ https://github.com/RomanBatyuk/Course_project_Habit_Tracker
 pip install -r requirements.txt
 ```
 
+## Действия для запуска:
+
+1. Выполните команду "docker-compose up --build" для сборки образов.
+2. Далее в браузере зайдите на сайт "http://localhost:8000/admin/" и войдите в админ панель.
+
 ## Доступный функционал:
 
 * Вывод списока привычек текущего пользователя с пагинацией.
