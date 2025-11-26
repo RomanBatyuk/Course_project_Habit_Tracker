@@ -48,3 +48,5 @@ urlpatterns = [
 
 # name: user1, email: Email: user1@example.com, password: 1111
 # name: user2, email: Email: user2@example.com, password: 2222
+# name: user3, email: Email: user3@example.com, password: 3333
+
