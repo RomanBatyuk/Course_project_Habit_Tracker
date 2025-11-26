@@ -1,9 +1,9 @@
 name: Deploy Django Project
 on:
   push:
-    branches: [ "feature" ]
+    branches: [ "feature_ci" ]
   pull_request:
-    branches: [ "feature" ]
+    branches: [ "feature_ci" ]
 jobs:
   test:
     runs-on: ubuntu-latest
