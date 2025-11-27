@@ -109,6 +109,6 @@ jobs:
             # Останавливаем старые контейнеры, если они есть
             sudo docker compose down || true
             # Подтягиваем свежий код
-            git pull origin feature || git clone -b feature git@github.com:${{ github.repository }}.git .
+            git pull origin feature_ci || git clone -b feature_ci git@github.com:${{ github.repository }}.git .
             # Собираем и запускаем контейнеры
             sudo docker compose up -d --build
