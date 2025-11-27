@@ -5,6 +5,8 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -50,7 +52,7 @@ services:
       - staticfiles:/app/static
       - media:/app/media
     ports:
-      - "8080:8000"  # Изменено для избежания блокировки (внешний доступ на 8080, если нужно напрямую)
+      - "8000:8000"  # Изменено для избежания блокировки (внешний доступ на 8080, если нужно напрямую)
     depends_on:
       db:
         condition: service_healthy  # Добавлено
