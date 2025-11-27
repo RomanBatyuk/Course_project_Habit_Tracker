@@ -27,7 +27,7 @@ services:
   celery:
     build: .
     entrypoint: ""  # Добавляем, чтобы migrate/collectstatic для celery (опционально)
-    command: ["celery", "-A", "habit", "worker", "--loglevel=info"]  # Замените на ваше приложение
+    command: ["celery", "-A", "config", "worker", "--loglevel=info"]  # Замените на ваше приложение
     volumes:
       - .:/app  # Изменено с /code
     depends_on:
@@ -38,10 +38,6 @@ services:
     env_file:
       - .env
     environment:
-      - HOST=db
-      - POSTGRES_DB=habit_tracker
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
 
