@@ -68,6 +68,8 @@ jobs:
           DEBUG: True
         run: |
             python manage.py migrate
+            python manage.py test
+          
           
 
   deploy:
