@@ -55,9 +55,9 @@ jobs:
           done
       - name: Run migrations
         env:
-          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-          DATABASE_USER: ${{ secrets.DATABASE_USER }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          NAME: ${{ secrets.DATABASE_NAME }}
+          USER: ${{ secrets.DATABASE_USER }}
+          PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           STRIPE_API_VERSION: ${{ secrets.STRIPE_API_VERSION }}
