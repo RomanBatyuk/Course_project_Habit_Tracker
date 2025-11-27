@@ -61,6 +61,7 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           STRIPE_API_VERSION: ${{ secrets.STRIPE_API_VERSION }}
+          HOST: localhost
           REDIS_HOST: localhost
           REDIS_PORT: 6379
           REDIS_DB: 0
