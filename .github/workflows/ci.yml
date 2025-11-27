@@ -11,9 +11,9 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_DB: base_one
+          POSTGRES_DB: postgres
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: 12345
+          POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
@@ -86,11 +86,11 @@ jobs:
             cd /home/${{ secrets.SERVER_USER }}/Course_project_Habit_Tracker || mkdir -p /home/${{ secrets.SERVER_USER }}/Course_project_Habit_Tracker && cd /home/${{ secrets.SERVER_USER }}/Course_project_Habit_Tracker
             cat << 'EOF' > .env
             SECRET_KEY=${{ secrets.SECRET_KEY }}
-            DATABASE_NAME=${{ secrets.DATABASE_NAME }}
-            DATABASE_USER=${{ secrets.DATABASE_USER }}
-            DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
-            DATABASE_HOST=${{ secrets.DATABASE_HOST }}
-            DATABASE_PORT=${{ secrets.DATABASE_PORT }}
+            NAME=${{ secrets.DATABASE_NAME }}
+            USER=${{ secrets.DATABASE_USER }}
+            PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+            HOST=${{ secrets.HOST }}
+            PORT=${{ secrets.PORT }}
             
             # Django
             DEBUG=True
