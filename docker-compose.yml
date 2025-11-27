@@ -2,9 +2,9 @@ services:
   db:
     image: postgres:14
     environment:
-      POSTGRES_DB: habit_tracker
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: base_one
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -62,13 +62,6 @@ services:
         condition: service_healthy  # Добавлено
     env_file:
       - .env
-    environment:
-      - HOST=db
-      - POSTGRES_DB=habit_tracker
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
 
   nginx:
     image: nginx:stable-alpine  # Используем готовый образ вместо build
