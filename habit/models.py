@@ -58,4 +58,4 @@ class Habit(models.Model):
         verbose_name_plural = "Привычки"
 
     def __str__(self):
-        return f"{self.name}: {self.action} ({"Приятная" if self.is_pleasant else "Полезная"})"
+        return f'{self.name}: {self.action} ({"Приятная" if self.is_pleasant else "Полезная"})'
