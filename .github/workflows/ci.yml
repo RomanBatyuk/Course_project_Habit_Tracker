@@ -68,7 +68,7 @@ jobs:
 #          REDIS_DB: 0
 #          DEBUG: True
         run: |
-            python manage.py migrate
+#            python manage.py migrate
             python manage.py test
 
 
