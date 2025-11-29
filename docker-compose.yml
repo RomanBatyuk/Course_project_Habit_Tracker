@@ -1,10 +1,12 @@
 services:
   db:
     image: postgres:14
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: habit_tracker
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -45,8 +47,11 @@ services:
 
   web:
     build: .
-    entrypoint: /app/entrypoint.sh
-    command: sh -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+#    entrypoint: /app/entrypoint.sh
+    command: >
+      sh -c "python manage.py migrate &&
+      python manage.py collectstatic --noinput &&
+      python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app  # Добавлено для hot-reload кода в development
       - staticfiles:/app/static
