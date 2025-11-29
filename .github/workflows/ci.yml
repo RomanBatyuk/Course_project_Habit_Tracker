@@ -86,7 +86,7 @@ jobs:
             SECRET_KEY=${{ secrets.SECRET_KEY }}
             NAME=${{ secrets.DATABASE_NAME }}
             USER=${{ secrets.DATABASE_USER }}
-            PASSWORD=${{ secrets.DATABASE_PASSWORD }}
+            PASSWORD=postgres
             HOST=${{ secrets.HOST }}
             PORT=${{ secrets.PORT }}
             
