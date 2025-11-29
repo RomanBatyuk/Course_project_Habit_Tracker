@@ -67,8 +67,12 @@ jobs:
 #          REDIS_PORT: 6379
 #          REDIS_DB: 0
 #          DEBUG: True
+        env:
+          DEBUG: True
+          DATABASE_ENGINE: django.db.backends.sqlite3
+          DATABASE_NAME: db.sqlite3
         run: |
-#            python manage.py migrate
+            python manage.py migrate
             python manage.py test
 
 
