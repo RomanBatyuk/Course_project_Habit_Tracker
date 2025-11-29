@@ -88,13 +88,22 @@ jobs:
           script: |
             cd /home/${{ secrets.SERVER_USER }}/Course_project_Habit_Tracker
 
-            # Останавливаем контейнеры
-            sudo docker compose down || true
+            # Останавливаем контейнеры если есть docker-compose.yml
+            if [ -f "docker-compose.yml" ]; then
+              sudo docker compose down || true
+            fi
+
+            # Инициализируем git репозиторий если его нет
+            if [ ! -d ".git" ]; then
+              echo "Initializing git repository..."
+              git init
+              git remote add origin https://github.com/${{ github.repository }}.git
+            fi
 
             # Принудительно обновляем код
             git fetch origin
+            git checkout -B feature_ci origin/feature_ci
             git reset --hard origin/feature_ci
-            git clean -fd
 
             # Запускаем контейнеры
             sudo docker compose up -d --build
