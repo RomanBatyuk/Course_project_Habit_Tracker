@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:15
+        image: postgres:14
         env:
-          POSTGRES_DB: postgres
+          POSTGRES_DB: habit_tracker
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
@@ -59,8 +59,6 @@ jobs:
           USER: ${{ secrets.DATABASE_USER }}
           PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-          STRIPE_API_VERSION: ${{ secrets.STRIPE_API_VERSION }}
           HOST: localhost
           REDIS_HOST: localhost
           REDIS_PORT: 6379
@@ -95,15 +93,7 @@ jobs:
             # Django
             DEBUG=True
             
-            # Stripe
-            STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
-            STRIPE_API_VERSION=${{ secrets.STRIPE_API_VERSION }}
             
-            # Redis
-            REDIS_HOST=${{ secrets.REDIS_HOST }}
-            REDIS_PORT=${{ secrets.REDIS_PORT }}
-            REDIS_DB=${{ secrets.REDIS_DB }}
-
             EOF
             
             # Останавливаем старые контейнеры, если они есть

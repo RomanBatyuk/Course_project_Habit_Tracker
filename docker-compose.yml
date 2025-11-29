@@ -18,7 +18,7 @@ services:
       retries: 5
 
   redis:
-    image: redis:7-alpine
+    image: redis:7
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
@@ -67,7 +67,7 @@ services:
       - .env
 
   nginx:
-    image: nginx:stable-alpine  # Используем готовый образ вместо build
+    image: nginx:stable  # Используем готовый образ вместо build
     ports:
       - "80:80"
     depends_on:

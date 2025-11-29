@@ -156,6 +156,7 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost",
     "https://read-and-write.example.com",
+
 ]
 CORS_ALLOW_ALL_ORIGINS = not any(CORS_ALLOWED_ORIGINS)
 
