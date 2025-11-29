@@ -75,7 +75,7 @@ services:
         condition: service_started  # Улучшено: ждём запуска web
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf  # Добавлено: монтируем конфиг
-      - staticfiles:/app/static
+      - staticfiles:/app/staticfiles
       - media:/app/media
 
 volumes:

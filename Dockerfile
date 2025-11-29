@@ -13,6 +13,7 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt
 # Копирование проекта
 COPY . /app
 WORKDIR /app
+RUN mkdir -p /app/staticfiles /app/media
 
 # Entrypoint
 COPY entrypoint.sh /app/entrypoint.sh
