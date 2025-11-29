@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.13-slim
 
 # Установка зависимостей системы
 RUN apt-get update && apt-get install -y \
@@ -19,4 +19,3 @@ COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
