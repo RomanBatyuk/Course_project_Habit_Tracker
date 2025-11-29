@@ -67,12 +67,12 @@ jobs:
 #        run: |
 #            python manage.py migrate
 #            python manage.py test
-          
-          
+
+
 
   deploy:
     runs-on: ubuntu-latest
-  #  needs: test
+#    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -86,12 +86,15 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.SERVER_USER }}
-            
-            # Удаляем старую папку и клонируем заново
+            cd /home/${{ secrets.SERVER_USER }}/Course_project_Habit_Tracker
+
+            # Останавливаем контейнеры
             sudo docker compose down || true
-            rm -rf Course_project_Habit_Tracker
-            git clone -b feature_ci https://github.com/${{ github.repository }}.git Course_project_Habit_Tracker
-            
-            cd Course_project_Habit_Tracker
+
+            # Принудительно обновляем код
+            git fetch origin
+            git reset --hard origin/feature_ci
+            git clean -fd
+
+            # Запускаем контейнеры
             sudo docker compose up -d --build
