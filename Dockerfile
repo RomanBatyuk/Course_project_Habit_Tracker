@@ -1,19 +1,22 @@
 FROM python:3.13-slim
 
+# Установка зависимостей системы
 RUN apt-get update && apt-get install -y \
+    postgresql-client \
     gcc \
-    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /code
+# Установка Python-зависимостей
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-COPY requirements.txt /code/
-RUN pip install --no-cache-dir -r requirements.txt
+# Копирование проекта
+COPY . /app
+WORKDIR /app
+RUN mkdir -p /app/staticfiles /app/media
 
-COPY . /code/
-
-RUN echo '#!/bin/bash\npython manage.py migrate\npython manage.py collectstatic --noinput\nexec "$@"' > /code/entrypoint.sh && chmod +x /code/entrypoint.sh
-
-EXPOSE 8000
+# Entrypoint
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

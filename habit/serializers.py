@@ -55,14 +55,14 @@ class CreateHabitSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     {
                         "non_field_errors": "Для полезной привычки укажите вознаграждение"
-                                            "или связанную приятную привычку."
+                        "или связанную приятную привычку."
                     }
                 )
             if reward is not None and related_habit is not None:
                 raise serializers.ValidationError(
                     {
                         "non_field_errors": "Для полезной привычки укажите либо вознаграждение,"
-                                            "либо связанную приятную привычку, но не оба."
+                        "либо связанную приятную привычку, но не оба."
                     }
                 )
 

@@ -3,33 +3,37 @@ services:
     image: postgres:14
     env_file:
       - .env
+    environment:
+      POSTGRES_DB: habit_tracker
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d habit_tracker"]
       interval: 10s
       timeout: 5s
       retries: 5
 
   redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
+    image: redis:7
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  web:
+  celery:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    entrypoint: ""  # Добавляем, чтобы migrate/collectstatic для celery (опционально)
+    command: ["celery", "-A", "config", "worker", "--loglevel=info"]  # Замените на ваше приложение
     volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
+      - .:/app  # Изменено с /code
     depends_on:
       db:
         condition: service_healthy
@@ -38,26 +42,44 @@ services:
     env_file:
       - .env
     environment:
-      - HOST=db
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
 
-  celery:
+  web:
     build: .
-    command: celery -A config worker -l info
+#    entrypoint: /app/entrypoint.sh
+    command: >
+      sh -c "python manage.py migrate &&
+      python manage.py collectstatic --noinput &&
+      python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/code
+      - .:/app  # Добавлено для hot-reload кода в development
+      - staticfiles:/app/staticfiles
+      - media:/app/media
+    ports:
+      - "8000:8000"  # Изменено для избежания блокировки (внешний доступ на 8080, если нужно напрямую)
     depends_on:
       db:
-        condition: service_healthy
+        condition: service_healthy  # Добавлено
       redis:
-        condition: service_healthy
+        condition: service_healthy  # Добавлено
     env_file:
       - .env
-    environment:
-      - HOST=db
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+  nginx:
+    image: nginx:stable  # Используем готовый образ вместо build
+    ports:
+      - "80:80"
+    depends_on:
+      web:
+        condition: service_started  # Улучшено: ждём запуска web
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Добавлено: монтируем конфиг
+      - staticfiles:/app/staticfiles
+      - media:/app/media
 
 volumes:
   postgres_data:
+  redis_data:
+  staticfiles:
+  media:
