@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
-import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -32,7 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web', '158.160.7.155']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "web", "158.160.7.155"]
 
 # Application definition
 
@@ -84,7 +83,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-if os.getenv("DATABASE_NAME")=="db.sqlite3":
+if os.getenv("DATABASE_NAME") == "db.sqlite3":
 
     DATABASES = {
         "default": {
@@ -139,11 +138,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/app/staticfiles'
-STATICFILES_DIRS = []  #("/app/static",)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/app/media'
+STATIC_URL = "/static/"
+STATIC_ROOT = "/app/staticfiles"
+STATICFILES_DIRS = []  # ("/app/static",)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = "/app/media"
 
 
 # Default primary key field type
@@ -167,7 +166,6 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost",
     "https://read-and-write.example.com",
-
 ]
 CORS_ALLOW_ALL_ORIGINS = not any(CORS_ALLOWED_ORIGINS)
 
